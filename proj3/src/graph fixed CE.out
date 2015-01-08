@@ -1,0 +1,304 @@
+============================== Prover9 ===============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 18707 was started by wgeraedts on crookshanks,
+Thu Jan  8 15:51:57 2015
+The command was "prover9 -f graph fixed CE.in".
+============================== end of head ===========================
+
+============================== INPUT =================================
+
+% Reading from file graph fixed CE.in
+
+
+formulas(assumptions).
+red(B,F).
+red(B,I).
+red(C,H).
+red(D,J).
+red(E,I).
+red(G,I).
+red(I,J).
+blue(C,G).
+blue(D,I).
+blue(E,H).
+blue(F,J).
+blue(G,H).
+red(A,E).
+blue(D,B).
+reachable_blue(A).
+reachable_red(A).
+reachable_blue(x) & red(x,y) -> reachable_red(y).
+reachable_blue(x) & red(y,x) -> reachable_red(y).
+reachable_red(x) & blue(x,y) -> reachable_blue(y).
+reachable_red(x) & blue(y,x) -> reachable_blue(y).
+end_of_list.
+
+formulas(goals).
+-(reachable_blue(B) | reachable_red(B)).
+end_of_list.
+
+============================== end of input ==========================
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+1 reachable_blue(x) & red(x,y) -> reachable_red(y) # label(non_clause).  [assumption].
+2 reachable_blue(x) & red(y,x) -> reachable_red(y) # label(non_clause).  [assumption].
+3 reachable_red(x) & blue(x,y) -> reachable_blue(y) # label(non_clause).  [assumption].
+4 reachable_red(x) & blue(y,x) -> reachable_blue(y) # label(non_clause).  [assumption].
+5 -(reachable_blue(B) | reachable_red(B)) # label(non_clause) # label(goal).  [goal].
+
+============================== end of process non-clausal formulas ===
+
+============================== PROCESS INITIAL CLAUSES ===============
+
+% Clauses before input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+red(B,F).  [assumption].
+red(B,I).  [assumption].
+red(C,H).  [assumption].
+red(D,J).  [assumption].
+red(E,I).  [assumption].
+red(G,I).  [assumption].
+red(I,J).  [assumption].
+blue(C,G).  [assumption].
+blue(D,I).  [assumption].
+blue(E,H).  [assumption].
+blue(F,J).  [assumption].
+blue(G,H).  [assumption].
+red(A,E).  [assumption].
+blue(D,B).  [assumption].
+reachable_blue(A).  [assumption].
+reachable_red(A).  [assumption].
+-reachable_blue(x) | -red(x,y) | reachable_red(y).  [clausify(1)].
+-reachable_blue(x) | -red(y,x) | reachable_red(y).  [clausify(2)].
+-reachable_red(x) | -blue(x,y) | reachable_blue(y).  [clausify(3)].
+-reachable_red(x) | -blue(y,x) | reachable_blue(y).  [clausify(4)].
+reachable_blue(B) | reachable_red(B).  [deny(5)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== PREDICATE ELIMINATION =================
+
+Eliminating red/2
+6 -reachable_blue(x) | -red(x,y) | reachable_red(y).  [clausify(1)].
+7 red(B,F).  [assumption].
+8 red(B,I).  [assumption].
+9 red(C,H).  [assumption].
+10 red(D,J).  [assumption].
+11 red(E,I).  [assumption].
+12 red(G,I).  [assumption].
+13 red(I,J).  [assumption].
+14 red(A,E).  [assumption].
+Derived: -reachable_blue(B) | reachable_red(F).  [resolve(6,b,7,a)].
+Derived: -reachable_blue(B) | reachable_red(I).  [resolve(6,b,8,a)].
+Derived: -reachable_blue(C) | reachable_red(H).  [resolve(6,b,9,a)].
+Derived: -reachable_blue(D) | reachable_red(J).  [resolve(6,b,10,a)].
+Derived: -reachable_blue(E) | reachable_red(I).  [resolve(6,b,11,a)].
+Derived: -reachable_blue(G) | reachable_red(I).  [resolve(6,b,12,a)].
+Derived: -reachable_blue(I) | reachable_red(J).  [resolve(6,b,13,a)].
+Derived: -reachable_blue(A) | reachable_red(E).  [resolve(6,b,14,a)].
+15 -reachable_blue(x) | -red(y,x) | reachable_red(y).  [clausify(2)].
+Derived: -reachable_blue(F) | reachable_red(B).  [resolve(15,b,7,a)].
+Derived: -reachable_blue(I) | reachable_red(B).  [resolve(15,b,8,a)].
+Derived: -reachable_blue(H) | reachable_red(C).  [resolve(15,b,9,a)].
+Derived: -reachable_blue(J) | reachable_red(D).  [resolve(15,b,10,a)].
+Derived: -reachable_blue(I) | reachable_red(E).  [resolve(15,b,11,a)].
+Derived: -reachable_blue(I) | reachable_red(G).  [resolve(15,b,12,a)].
+Derived: -reachable_blue(J) | reachable_red(I).  [resolve(15,b,13,a)].
+Derived: -reachable_blue(E) | reachable_red(A).  [resolve(15,b,14,a)].
+
+Eliminating blue/2
+16 -reachable_red(x) | -blue(x,y) | reachable_blue(y).  [clausify(3)].
+17 blue(C,G).  [assumption].
+18 blue(D,I).  [assumption].
+19 blue(E,H).  [assumption].
+20 blue(F,J).  [assumption].
+21 blue(G,H).  [assumption].
+22 blue(D,B).  [assumption].
+Derived: -reachable_red(C) | reachable_blue(G).  [resolve(16,b,17,a)].
+Derived: -reachable_red(D) | reachable_blue(I).  [resolve(16,b,18,a)].
+Derived: -reachable_red(E) | reachable_blue(H).  [resolve(16,b,19,a)].
+Derived: -reachable_red(F) | reachable_blue(J).  [resolve(16,b,20,a)].
+Derived: -reachable_red(G) | reachable_blue(H).  [resolve(16,b,21,a)].
+Derived: -reachable_red(D) | reachable_blue(B).  [resolve(16,b,22,a)].
+23 -reachable_red(x) | -blue(y,x) | reachable_blue(y).  [clausify(4)].
+Derived: -reachable_red(G) | reachable_blue(C).  [resolve(23,b,17,a)].
+Derived: -reachable_red(I) | reachable_blue(D).  [resolve(23,b,18,a)].
+Derived: -reachable_red(H) | reachable_blue(E).  [resolve(23,b,19,a)].
+Derived: -reachable_red(J) | reachable_blue(F).  [resolve(23,b,20,a)].
+Derived: -reachable_red(H) | reachable_blue(G).  [resolve(23,b,21,a)].
+Derived: -reachable_red(B) | reachable_blue(D).  [resolve(23,b,22,a)].
+
+Eliminating reachable_blue/1
+24 -reachable_blue(B) | reachable_red(F).  [resolve(6,b,7,a)].
+25 reachable_blue(A).  [assumption].
+26 reachable_blue(B) | reachable_red(B).  [deny(5)].
+Derived: reachable_red(F) | reachable_red(B).  [resolve(24,a,26,a)].
+27 -reachable_blue(B) | reachable_red(I).  [resolve(6,b,8,a)].
+Derived: reachable_red(I) | reachable_red(B).  [resolve(27,a,26,a)].
+28 -reachable_blue(C) | reachable_red(H).  [resolve(6,b,9,a)].
+29 -reachable_blue(D) | reachable_red(J).  [resolve(6,b,10,a)].
+30 -reachable_blue(E) | reachable_red(I).  [resolve(6,b,11,a)].
+31 -reachable_blue(G) | reachable_red(I).  [resolve(6,b,12,a)].
+32 -reachable_blue(I) | reachable_red(J).  [resolve(6,b,13,a)].
+33 -reachable_blue(A) | reachable_red(E).  [resolve(6,b,14,a)].
+Derived: reachable_red(E).  [resolve(33,a,25,a)].
+34 -reachable_blue(F) | reachable_red(B).  [resolve(15,b,7,a)].
+35 -reachable_blue(I) | reachable_red(B).  [resolve(15,b,8,a)].
+36 -reachable_blue(H) | reachable_red(C).  [resolve(15,b,9,a)].
+37 -reachable_blue(J) | reachable_red(D).  [resolve(15,b,10,a)].
+38 -reachable_blue(I) | reachable_red(E).  [resolve(15,b,11,a)].
+39 -reachable_blue(I) | reachable_red(G).  [resolve(15,b,12,a)].
+40 -reachable_blue(J) | reachable_red(I).  [resolve(15,b,13,a)].
+41 -reachable_blue(E) | reachable_red(A).  [resolve(15,b,14,a)].
+42 -reachable_red(C) | reachable_blue(G).  [resolve(16,b,17,a)].
+Derived: -reachable_red(C) | reachable_red(I).  [resolve(42,b,31,a)].
+43 -reachable_red(D) | reachable_blue(I).  [resolve(16,b,18,a)].
+Derived: -reachable_red(D) | reachable_red(J).  [resolve(43,b,32,a)].
+Derived: -reachable_red(D) | reachable_red(B).  [resolve(43,b,35,a)].
+Derived: -reachable_red(D) | reachable_red(G).  [resolve(43,b,39,a)].
+44 -reachable_red(E) | reachable_blue(H).  [resolve(16,b,19,a)].
+Derived: -reachable_red(E) | reachable_red(C).  [resolve(44,b,36,a)].
+45 -reachable_red(F) | reachable_blue(J).  [resolve(16,b,20,a)].
+Derived: -reachable_red(F) | reachable_red(D).  [resolve(45,b,37,a)].
+Derived: -reachable_red(F) | reachable_red(I).  [resolve(45,b,40,a)].
+46 -reachable_red(G) | reachable_blue(H).  [resolve(16,b,21,a)].
+Derived: -reachable_red(G) | reachable_red(C).  [resolve(46,b,36,a)].
+47 -reachable_red(D) | reachable_blue(B).  [resolve(16,b,22,a)].
+Derived: -reachable_red(D) | reachable_red(F).  [resolve(47,b,24,a)].
+Derived: -reachable_red(D) | reachable_red(I).  [resolve(47,b,27,a)].
+48 -reachable_red(G) | reachable_blue(C).  [resolve(23,b,17,a)].
+Derived: -reachable_red(G) | reachable_red(H).  [resolve(48,b,28,a)].
+49 -reachable_red(I) | reachable_blue(D).  [resolve(23,b,18,a)].
+Derived: -reachable_red(I) | reachable_red(J).  [resolve(49,b,29,a)].
+50 -reachable_red(H) | reachable_blue(E).  [resolve(23,b,19,a)].
+Derived: -reachable_red(H) | reachable_red(I).  [resolve(50,b,30,a)].
+Derived: -reachable_red(H) | reachable_red(A).  [resolve(50,b,41,a)].
+51 -reachable_red(J) | reachable_blue(F).  [resolve(23,b,20,a)].
+Derived: -reachable_red(J) | reachable_red(B).  [resolve(51,b,34,a)].
+52 -reachable_red(H) | reachable_blue(G).  [resolve(23,b,21,a)].
+53 -reachable_red(B) | reachable_blue(D).  [resolve(23,b,22,a)].
+Derived: -reachable_red(B) | reachable_red(J).  [resolve(53,b,29,a)].
+
+============================== end predicate elimination =============
+
+Auto_denials:  (non-Horn, no changes).
+
+Term ordering decisions:
+Predicate symbol precedence:  predicate_order([ reachable_red ]).
+Function symbol precedence:  function_order([ D, I, B, F, J, C, G, H, A, E ]).
+After inverse_order:  (no changes).
+Unfolding symbols: (none).
+
+Auto_inference settings:
+  % set(binary_resolution).  % (non-Horn)
+  % set(neg_ur_resolution).  % (non-Horn, less than 100 clauses)
+
+Auto_process settings:
+  % set(factor).  % (non-Horn)
+  % set(unit_deletion).  % (non-Horn)
+
+kept:      54 reachable_red(A).  [assumption].
+kept:      55 reachable_red(F) | reachable_red(B).  [resolve(24,a,26,a)].
+kept:      56 reachable_red(I) | reachable_red(B).  [resolve(27,a,26,a)].
+kept:      57 reachable_red(E).  [resolve(33,a,25,a)].
+kept:      58 -reachable_red(C) | reachable_red(I).  [resolve(42,b,31,a)].
+kept:      59 -reachable_red(D) | reachable_red(J).  [resolve(43,b,32,a)].
+kept:      60 -reachable_red(D) | reachable_red(B).  [resolve(43,b,35,a)].
+kept:      61 -reachable_red(D) | reachable_red(G).  [resolve(43,b,39,a)].
+           62 -reachable_red(E) | reachable_red(C).  [resolve(44,b,36,a)].
+kept:      63 reachable_red(C).  [copy(62),unit_del(a,57)].
+kept:      64 -reachable_red(F) | reachable_red(D).  [resolve(45,b,37,a)].
+kept:      65 -reachable_red(F) | reachable_red(I).  [resolve(45,b,40,a)].
+kept:      66 -reachable_red(D) | reachable_red(F).  [resolve(47,b,24,a)].
+kept:      67 -reachable_red(D) | reachable_red(I).  [resolve(47,b,27,a)].
+kept:      68 -reachable_red(G) | reachable_red(H).  [resolve(48,b,28,a)].
+kept:      69 -reachable_red(I) | reachable_red(J).  [resolve(49,b,29,a)].
+kept:      70 -reachable_red(H) | reachable_red(I).  [resolve(50,b,30,a)].
+kept:      71 -reachable_red(J) | reachable_red(B).  [resolve(51,b,34,a)].
+kept:      72 -reachable_red(B) | reachable_red(J).  [resolve(53,b,29,a)].
+kept:      73 reachable_red(I).  [back_unit_del(58),unit_del(a,63)].
+kept:      74 reachable_red(J).  [back_unit_del(69),unit_del(a,73)].
+kept:      75 reachable_red(B).  [back_unit_del(71),unit_del(a,74)].
+
+============================== end of process initial clauses ========
+
+============================== CLAUSES FOR SEARCH ====================
+
+% Clauses after input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+54 reachable_red(A).  [assumption].
+57 reachable_red(E).  [resolve(33,a,25,a)].
+61 -reachable_red(D) | reachable_red(G).  [resolve(43,b,39,a)].
+63 reachable_red(C).  [copy(62),unit_del(a,57)].
+64 -reachable_red(F) | reachable_red(D).  [resolve(45,b,37,a)].
+66 -reachable_red(D) | reachable_red(F).  [resolve(47,b,24,a)].
+68 -reachable_red(G) | reachable_red(H).  [resolve(48,b,28,a)].
+73 reachable_red(I).  [back_unit_del(58),unit_del(a,63)].
+74 reachable_red(J).  [back_unit_del(69),unit_del(a,73)].
+75 reachable_red(B).  [back_unit_del(71),unit_del(a,74)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== end of clauses for search =============
+
+============================== SEARCH ================================
+
+% Starting search at 0.01 seconds.
+
+given #1 (I,wt=2): 54 reachable_red(A).  [assumption].
+
+given #2 (I,wt=2): 57 reachable_red(E).  [resolve(33,a,25,a)].
+
+given #3 (I,wt=4): 61 -reachable_red(D) | reachable_red(G).  [resolve(43,b,39,a)].
+
+given #4 (I,wt=2): 63 reachable_red(C).  [copy(62),unit_del(a,57)].
+
+given #5 (I,wt=4): 64 -reachable_red(F) | reachable_red(D).  [resolve(45,b,37,a)].
+
+given #6 (I,wt=4): 66 -reachable_red(D) | reachable_red(F).  [resolve(47,b,24,a)].
+
+given #7 (I,wt=4): 68 -reachable_red(G) | reachable_red(H).  [resolve(48,b,28,a)].
+
+given #8 (I,wt=2): 73 reachable_red(I).  [back_unit_del(58),unit_del(a,63)].
+
+given #9 (I,wt=2): 74 reachable_red(J).  [back_unit_del(69),unit_del(a,73)].
+
+given #10 (I,wt=2): 75 reachable_red(B).  [back_unit_del(71),unit_del(a,74)].
+
+============================== STATISTICS ============================
+
+Given=10. Generated=23. Kept=21. proofs=0.
+Usable=10. Sos=0. Demods=0. Limbo=0, Disabled=79. Hints=0.
+Kept_by_rule=0, Deleted_by_rule=0.
+Forward_subsumed=2. Back_subsumed=8.
+Sos_limit_deleted=0. Sos_displaced=0. Sos_removed=0.
+New_demodulators=0 (0 lex), Back_demodulated=0. Back_unit_deleted=3.
+Demod_attempts=0. Demod_rewrites=0.
+Res_instance_prunes=0. Para_instance_prunes=0. Basic_paramod_prunes=0.
+Nonunit_fsub_feature_tests=0. Nonunit_bsub_feature_tests=23.
+Megabytes=0.08.
+User_CPU=0.01, System_CPU=0.00, Wall_clock=0.
+
+============================== end of statistics =====================
+
+============================== end of search =========================
+
+SEARCH FAILED
+
+Exiting with failure.
+
+Process 18707 exit (sos_empty) Thu Jan  8 15:51:57 2015

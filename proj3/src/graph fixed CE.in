@@ -14,9 +14,9 @@ blue(E, H).
 blue(F, J).
 blue(G, H).
 
-% Optional edges
-red(A, C) | red(A, E) | red(A, G).
-blue(D, A) | blue(D, B).
+% Optional edges, but fixed this time
+red(A, E).
+blue(D, B).
 
 % We start at vertex A.
 reachable_blue(A).
@@ -32,7 +32,7 @@ end_of_list.
 
 formulas(goals).
 
-% Find an alternating path to B.
-reachable_blue(B) | reachable_red(B).
+% Try to prove that there is no alternating path to B, so that we get a counterexample in the SEARCH section
+-(reachable_blue(B) | reachable_red(B)).
 
 end_of_list.
