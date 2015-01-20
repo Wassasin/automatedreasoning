@@ -1,0 +1,36 @@
+formulas(assumptions).
+
+red(B, F).
+red(B, I).
+red(C, H).
+red(D, J).
+red(E, I).
+red(G, I).
+red(I, J).
+
+blue(C, G).
+blue(D, I).
+blue(E, H).
+blue(F, J).
+blue(G, H).
+
+% Optional edges, but fixed this time
+red(A, E).
+blue(D, B).
+
+red(x, y) -> red(y, x).
+blue(x, y) -> blue(y, x).
+
+path_blue(x, y) & red(y, z) -> path_red(x, z).
+path_red(x, y) & blue(y, z) -> path_blue(x, z).
+
+path_blue(x, x).
+path_red(x, x).
+
+end_of_list.
+
+formulas(goals).
+
+path_blue(A, B) | path_red(A, B).
+
+end_of_list.
