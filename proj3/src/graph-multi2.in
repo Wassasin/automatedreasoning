@@ -1,0 +1,32 @@
+formulas(assumptions).
+
+Red != Black.
+Red != Blue.
+Black != Blue.
+
+edge(A, C, Red).
+edge(A, D, Red).
+edge(C, F, Red).
+edge(D, E, Red).
+edge(D, H, Red).
+edge(G, H, Red).
+
+edge(A, E, Black).
+edge(E, B, Black).
+edge(E, G, Black).
+edge(F, G, Black).
+
+edge(B, H, Blue).
+edge(C, H, Blue).
+edge(E, F, Blue).
+
+all c1 all c2 ( c1 != c2 -> ( path(x, y, c1) & ( edge(y, z, c2) | edge(z, y, c2) ) -> path(x, z, c2) ) ).
+all c path(x, x, c).
+
+end_of_list.
+
+formulas(goals).
+
+exists c path(A, B, c).
+
+end_of_list.
