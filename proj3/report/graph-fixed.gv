@@ -26,12 +26,13 @@ graph G {
     F -- J;
     G -- H;
     
-    edge [color="red", style="dashed"];
+    // Uncertain edges
+    edge [color="red"];
     A -- C [style="invisible"];
     A -- E;
     A -- G [style="invisible"];
     
-    edge [color="blue", style="dashed"];
+    edge [color="blue"];
     D -- A [style="invisible"];
     D -- B [style="invisible"];
 }
