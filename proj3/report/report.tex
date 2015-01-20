@@ -71,7 +71,7 @@ A path ending in a blue edge, followed by a red edge, forms a path ending in a r
 Finally, the empty path is valid in itself, thus the path relation is reflexive:
 \[ \bluep{x}{x} \band \redp{x}{x} \]
 
-Now we only need to prove the existance of the path from $A$ to $B$, by adding
+Now we only need to prove the existence of the path from $A$ to $B$, by adding
 a \provernine goal:
 \[ \bluep{A}{B} \bor \redp{A}{B} \]
 Which \provernine reports to be true, and yields a proof for within 0.008 seconds.
@@ -114,9 +114,9 @@ as listed in figure \ref{fig:proof-assump}, and drawn in figure \ref{fig:proof-g
 	\caption{\label{fig:proof-graph} The graph constructed from the aforementioned edges.}
 \end{figure}
 
-\paragraph{Generalization}
-I generalized the solution to solve the $n$-color reachability problem
-by parameterizing the edge and path relations in the color of the path and edge:
+\paragraph{Generalisation}
+I generalised the solution to solve the $n$-color reachability problem
+by parameterising the edge and path relations in the color of the path and edge:
 \[ \forall c_1, c_2 ~.~ c_1 \neq c_2 \bimp (\path{x}{y}{c_1} \band ( \edge{y}{z}{c_2} \bor \edge{z}{y}{c_2} ) \bimp \path{x}{z}{c_2} ) \]
 Similarly I adapt reflexivity for the $\mathtt{path}$ relation.
 \[ \forall c ~.~ \path{x}{x}{c} \]
@@ -128,7 +128,7 @@ So for every pair, we then need to define inequality, like this:
 And finally the goal can be defined as follows:
 \[ \exists c ~.~ \path{A}{B}{c} \]
 
-I applied this generalization to a random 3-color graph, as seen in figure \ref{fig:graph2}. \\
+I applied this generalisation to a random 3-color graph, as seen in figure \ref{fig:graph2}. \\
 
 \noindent
 \begin{minipage}[b]{\textwidth}
