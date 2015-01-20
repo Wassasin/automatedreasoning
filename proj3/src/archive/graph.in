@@ -1,0 +1,38 @@
+formulas(assumptions).
+
+red(B, F).
+red(B, I).
+red(C, H).
+red(D, J).
+red(E, I).
+red(G, I).
+red(I, J).
+
+blue(C, G).
+blue(D, I).
+blue(E, H).
+blue(F, J).
+blue(G, H).
+
+% Optional edges
+red(A, C) | red(A, E) | red(A, G).
+blue(D, A) | blue(D, B).
+
+% We start at vertex A.
+reachable_blue(A).
+reachable_red(A).
+
+% All vertices are reachable by a blue edge if there exists a vertex which was reachable by a red edge and a blue edge exists between these two vertices
+reachable_blue(x) & red(x, y) -> reachable_red(y).
+reachable_blue(x) & red(y, x) -> reachable_red(y).
+reachable_red(x) & blue(x, y) -> reachable_blue(y).
+reachable_red(x) & blue(y, x) -> reachable_blue(y).
+
+end_of_list.
+
+formulas(goals).
+
+% Find an alternating path to B.
+reachable_blue(B) | reachable_red(B).
+
+end_of_list.

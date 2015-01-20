@@ -1,0 +1,336 @@
+============================== Prover9 ===============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 18690 was started by wgeraedts on crookshanks,
+Thu Jan  8 15:51:27 2015
+The command was "prover9 -f graph.in".
+============================== end of head ===========================
+
+============================== INPUT =================================
+
+% Reading from file graph.in
+
+
+formulas(assumptions).
+red(B,F).
+red(B,I).
+red(C,H).
+red(D,J).
+red(E,I).
+red(G,I).
+red(I,J).
+blue(C,G).
+blue(D,I).
+blue(E,H).
+blue(F,J).
+blue(G,H).
+red(A,C) | red(A,E) | red(A,G).
+blue(D,A) | blue(D,B).
+reachable_blue(A).
+reachable_red(A).
+reachable_blue(x) & red(x,y) -> reachable_red(y).
+reachable_blue(x) & red(y,x) -> reachable_red(y).
+reachable_red(x) & blue(x,y) -> reachable_blue(y).
+reachable_red(x) & blue(y,x) -> reachable_blue(y).
+end_of_list.
+
+formulas(goals).
+reachable_blue(B) | reachable_red(B).
+end_of_list.
+
+============================== end of input ==========================
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+1 reachable_blue(x) & red(x,y) -> reachable_red(y) # label(non_clause).  [assumption].
+2 reachable_blue(x) & red(y,x) -> reachable_red(y) # label(non_clause).  [assumption].
+3 reachable_red(x) & blue(x,y) -> reachable_blue(y) # label(non_clause).  [assumption].
+4 reachable_red(x) & blue(y,x) -> reachable_blue(y) # label(non_clause).  [assumption].
+5 reachable_blue(B) | reachable_red(B) # label(non_clause) # label(goal).  [goal].
+
+============================== end of process non-clausal formulas ===
+
+============================== PROCESS INITIAL CLAUSES ===============
+
+% Clauses before input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+red(B,F).  [assumption].
+red(B,I).  [assumption].
+red(C,H).  [assumption].
+red(D,J).  [assumption].
+red(E,I).  [assumption].
+red(G,I).  [assumption].
+red(I,J).  [assumption].
+blue(C,G).  [assumption].
+blue(D,I).  [assumption].
+blue(E,H).  [assumption].
+blue(F,J).  [assumption].
+blue(G,H).  [assumption].
+red(A,C) | red(A,E) | red(A,G).  [assumption].
+blue(D,A) | blue(D,B).  [assumption].
+reachable_blue(A).  [assumption].
+reachable_red(A).  [assumption].
+-reachable_blue(x) | -red(x,y) | reachable_red(y).  [clausify(1)].
+-reachable_blue(x) | -red(y,x) | reachable_red(y).  [clausify(2)].
+-reachable_red(x) | -blue(x,y) | reachable_blue(y).  [clausify(3)].
+-reachable_red(x) | -blue(y,x) | reachable_blue(y).  [clausify(4)].
+-reachable_blue(B).  [deny(5)].
+-reachable_red(B).  [deny(5)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== PREDICATE ELIMINATION =================
+
+Eliminating reachable_blue/1
+6 -reachable_blue(x) | -red(x,y) | reachable_red(y).  [clausify(1)].
+7 reachable_blue(A).  [assumption].
+Derived: -red(A,x) | reachable_red(x).  [resolve(6,a,7,a)].
+8 -reachable_blue(x) | -red(y,x) | reachable_red(y).  [clausify(2)].
+Derived: -red(x,A) | reachable_red(x).  [resolve(8,a,7,a)].
+9 -reachable_red(x) | -blue(x,y) | reachable_blue(y).  [clausify(3)].
+Derived: -reachable_red(x) | -blue(x,y) | -red(y,z) | reachable_red(z).  [resolve(9,c,6,a)].
+Derived: -reachable_red(x) | -blue(x,y) | -red(z,y) | reachable_red(z).  [resolve(9,c,8,a)].
+10 -reachable_red(x) | -blue(y,x) | reachable_blue(y).  [clausify(4)].
+Derived: -reachable_red(x) | -blue(y,x) | -red(y,z) | reachable_red(z).  [resolve(10,c,6,a)].
+Derived: -reachable_red(x) | -blue(y,x) | -red(z,y) | reachable_red(z).  [resolve(10,c,8,a)].
+11 -reachable_blue(B).  [deny(5)].
+Derived: -reachable_red(x) | -blue(x,B).  [resolve(11,a,9,c)].
+Derived: -reachable_red(x) | -blue(B,x).  [resolve(11,a,10,c)].
+
+============================== end predicate elimination =============
+
+Auto_denials:  (non-Horn, no changes).
+
+Term ordering decisions:
+Predicate symbol precedence:  predicate_order([ reachable_red, red, blue ]).
+Function symbol precedence:  function_order([ A, I, D, G, B, C, E, H, J, F ]).
+After inverse_order:  (no changes).
+Unfolding symbols: (none).
+
+Auto_inference settings:
+  % set(binary_resolution).  % (non-Horn)
+  % set(neg_ur_resolution).  % (non-Horn, less than 100 clauses)
+
+Auto_process settings:
+  % set(factor).  % (non-Horn)
+  % set(unit_deletion).  % (non-Horn)
+
+kept:      12 red(B,F).  [assumption].
+kept:      13 red(B,I).  [assumption].
+kept:      14 red(C,H).  [assumption].
+kept:      15 red(D,J).  [assumption].
+kept:      16 red(E,I).  [assumption].
+kept:      17 red(G,I).  [assumption].
+kept:      18 red(I,J).  [assumption].
+kept:      19 blue(C,G).  [assumption].
+kept:      20 blue(D,I).  [assumption].
+kept:      21 blue(E,H).  [assumption].
+kept:      22 blue(F,J).  [assumption].
+kept:      23 blue(G,H).  [assumption].
+kept:      24 red(A,C) | red(A,E) | red(A,G).  [assumption].
+kept:      25 blue(D,A) | blue(D,B).  [assumption].
+kept:      26 reachable_red(A).  [assumption].
+kept:      27 -reachable_red(B).  [deny(5)].
+kept:      28 -red(A,x) | reachable_red(x).  [resolve(6,a,7,a)].
+kept:      29 -red(x,A) | reachable_red(x).  [resolve(8,a,7,a)].
+kept:      30 -reachable_red(x) | -blue(x,y) | -red(y,z) | reachable_red(z).  [resolve(9,c,6,a)].
+kept:      31 -reachable_red(x) | -blue(x,y) | -red(z,y) | reachable_red(z).  [resolve(9,c,8,a)].
+kept:      32 -reachable_red(x) | -blue(y,x) | -red(y,z) | reachable_red(z).  [resolve(10,c,6,a)].
+kept:      33 -reachable_red(x) | -blue(y,x) | -red(z,y) | reachable_red(z).  [resolve(10,c,8,a)].
+kept:      34 -reachable_red(x) | -blue(x,B).  [resolve(11,a,9,c)].
+kept:      35 -reachable_red(x) | -blue(B,x).  [resolve(11,a,10,c)].
+
+============================== end of process initial clauses ========
+
+============================== CLAUSES FOR SEARCH ====================
+
+% Clauses after input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+12 red(B,F).  [assumption].
+13 red(B,I).  [assumption].
+14 red(C,H).  [assumption].
+15 red(D,J).  [assumption].
+16 red(E,I).  [assumption].
+17 red(G,I).  [assumption].
+18 red(I,J).  [assumption].
+19 blue(C,G).  [assumption].
+20 blue(D,I).  [assumption].
+21 blue(E,H).  [assumption].
+22 blue(F,J).  [assumption].
+23 blue(G,H).  [assumption].
+24 red(A,C) | red(A,E) | red(A,G).  [assumption].
+25 blue(D,A) | blue(D,B).  [assumption].
+26 reachable_red(A).  [assumption].
+27 -reachable_red(B).  [deny(5)].
+28 -red(A,x) | reachable_red(x).  [resolve(6,a,7,a)].
+29 -red(x,A) | reachable_red(x).  [resolve(8,a,7,a)].
+30 -reachable_red(x) | -blue(x,y) | -red(y,z) | reachable_red(z).  [resolve(9,c,6,a)].
+31 -reachable_red(x) | -blue(x,y) | -red(z,y) | reachable_red(z).  [resolve(9,c,8,a)].
+32 -reachable_red(x) | -blue(y,x) | -red(y,z) | reachable_red(z).  [resolve(10,c,6,a)].
+33 -reachable_red(x) | -blue(y,x) | -red(z,y) | reachable_red(z).  [resolve(10,c,8,a)].
+34 -reachable_red(x) | -blue(x,B).  [resolve(11,a,9,c)].
+35 -reachable_red(x) | -blue(B,x).  [resolve(11,a,10,c)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== end of clauses for search =============
+
+============================== SEARCH ================================
+
+% Starting search at 0.01 seconds.
+
+given #1 (I,wt=3): 12 red(B,F).  [assumption].
+
+given #2 (I,wt=3): 13 red(B,I).  [assumption].
+
+given #3 (I,wt=3): 14 red(C,H).  [assumption].
+
+given #4 (I,wt=3): 15 red(D,J).  [assumption].
+
+given #5 (I,wt=3): 16 red(E,I).  [assumption].
+
+given #6 (I,wt=3): 17 red(G,I).  [assumption].
+
+given #7 (I,wt=3): 18 red(I,J).  [assumption].
+
+given #8 (I,wt=3): 19 blue(C,G).  [assumption].
+
+given #9 (I,wt=3): 20 blue(D,I).  [assumption].
+
+given #10 (I,wt=3): 21 blue(E,H).  [assumption].
+
+given #11 (I,wt=3): 22 blue(F,J).  [assumption].
+
+given #12 (I,wt=3): 23 blue(G,H).  [assumption].
+
+given #13 (I,wt=9): 24 red(A,C) | red(A,E) | red(A,G).  [assumption].
+
+given #14 (I,wt=6): 25 blue(D,A) | blue(D,B).  [assumption].
+
+given #15 (I,wt=2): 26 reachable_red(A).  [assumption].
+
+given #16 (I,wt=2): 27 -reachable_red(B).  [deny(5)].
+
+given #17 (I,wt=5): 28 -red(A,x) | reachable_red(x).  [resolve(6,a,7,a)].
+
+given #18 (I,wt=5): 29 -red(x,A) | reachable_red(x).  [resolve(8,a,7,a)].
+
+given #19 (I,wt=10): 30 -reachable_red(x) | -blue(x,y) | -red(y,z) | reachable_red(z).  [resolve(9,c,6,a)].
+
+given #20 (I,wt=10): 31 -reachable_red(x) | -blue(x,y) | -red(z,y) | reachable_red(z).  [resolve(9,c,8,a)].
+
+given #21 (I,wt=10): 32 -reachable_red(x) | -blue(y,x) | -red(y,z) | reachable_red(z).  [resolve(10,c,6,a)].
+
+given #22 (I,wt=10): 33 -reachable_red(x) | -blue(y,x) | -red(z,y) | reachable_red(z).  [resolve(10,c,8,a)].
+
+given #23 (I,wt=5): 34 -reachable_red(x) | -blue(x,B).  [resolve(11,a,9,c)].
+
+given #24 (I,wt=5): 35 -reachable_red(x) | -blue(B,x).  [resolve(11,a,10,c)].
+
+given #25 (A,wt=8): 36 reachable_red(E) | red(A,C) | red(A,G).  [resolve(28,a,24,b)].
+
+given #26 (F,wt=2): 51 -reachable_red(D).  [ur(31,b,20,a,c,13,a,d,27,a)].
+
+given #27 (F,wt=2): 64 -reachable_red(J).  [ur(33,b,22,a,c,12,a,d,27,a)].
+
+given #28 (F,wt=2): 71 -reachable_red(F).  [ur(31,b,22,a,c,15,a,d,51,a)].
+
+given #29 (F,wt=2): 75 -reachable_red(I).  [ur(32,b,20,a,c,15,a,d,64,a)].
+
+given #30 (T,wt=3): 80 blue(D,B).  [back_unit_del(25),unit_del(a,76)].
+
+given #31 (T,wt=5): 91 reachable_red(E) | red(A,G).  [back_unit_del(69),unit_del(c,86)].
+
+given #32 (T,wt=4): 92 reachable_red(E) | reachable_red(G).  [resolve(91,b,28,a)].
+
+given #33 (T,wt=7): 40 -reachable_red(G) | -red(H,x) | reachable_red(x).  [resolve(30,b,23,a)].
+
+given #34 (A,wt=3): 37 -red(A,B).  [ur(28,b,27,a)].
+
+given #35 (F,wt=2): 83 -reachable_red(H).  [ur(32,b,23,a,c,17,a,d,75,a)].
+
+given #36 (F,wt=2): 86 -reachable_red(C).  [ur(30,b,19,a,c,17,a,d,75,a)].
+
+============================== PROOF =================================
+
+% Proof 1 at 0.01 (+ 0.00) seconds.
+% Length of proof is 37.
+% Level of proof is 9.
+% Maximum clause weight is 10.000.
+% Given clauses 36.
+
+1 reachable_blue(x) & red(x,y) -> reachable_red(y) # label(non_clause).  [assumption].
+2 reachable_blue(x) & red(y,x) -> reachable_red(y) # label(non_clause).  [assumption].
+3 reachable_red(x) & blue(x,y) -> reachable_blue(y) # label(non_clause).  [assumption].
+4 reachable_red(x) & blue(y,x) -> reachable_blue(y) # label(non_clause).  [assumption].
+5 reachable_blue(B) | reachable_red(B) # label(non_clause) # label(goal).  [goal].
+6 -reachable_blue(x) | -red(x,y) | reachable_red(y).  [clausify(1)].
+7 reachable_blue(A).  [assumption].
+8 -reachable_blue(x) | -red(y,x) | reachable_red(y).  [clausify(2)].
+9 -reachable_red(x) | -blue(x,y) | reachable_blue(y).  [clausify(3)].
+10 -reachable_red(x) | -blue(y,x) | reachable_blue(y).  [clausify(4)].
+12 red(B,F).  [assumption].
+14 red(C,H).  [assumption].
+15 red(D,J).  [assumption].
+17 red(G,I).  [assumption].
+19 blue(C,G).  [assumption].
+20 blue(D,I).  [assumption].
+21 blue(E,H).  [assumption].
+22 blue(F,J).  [assumption].
+23 blue(G,H).  [assumption].
+24 red(A,C) | red(A,E) | red(A,G).  [assumption].
+27 -reachable_red(B).  [deny(5)].
+28 -red(A,x) | reachable_red(x).  [resolve(6,a,7,a)].
+30 -reachable_red(x) | -blue(x,y) | -red(y,z) | reachable_red(z).  [resolve(9,c,6,a)].
+31 -reachable_red(x) | -blue(x,y) | -red(z,y) | reachable_red(z).  [resolve(9,c,8,a)].
+32 -reachable_red(x) | -blue(y,x) | -red(y,z) | reachable_red(z).  [resolve(10,c,6,a)].
+33 -reachable_red(x) | -blue(y,x) | -red(z,y) | reachable_red(z).  [resolve(10,c,8,a)].
+36 reachable_red(E) | red(A,C) | red(A,G).  [resolve(28,a,24,b)].
+64 -reachable_red(J).  [ur(33,b,22,a,c,12,a,d,27,a)].
+69 reachable_red(E) | red(A,G) | reachable_red(C).  [resolve(36,b,28,a)].
+75 -reachable_red(I).  [ur(32,b,20,a,c,15,a,d,64,a)].
+83 -reachable_red(H).  [ur(32,b,23,a,c,17,a,d,75,a)].
+86 -reachable_red(C).  [ur(30,b,19,a,c,17,a,d,75,a)].
+91 reachable_red(E) | red(A,G).  [back_unit_del(69),unit_del(c,86)].
+92 reachable_red(E) | reachable_red(G).  [resolve(91,b,28,a)].
+93 -reachable_red(G).  [ur(32,b,19,a,c,14,a,d,83,a)].
+98 reachable_red(E).  [back_unit_del(92),unit_del(b,93)].
+102 $F.  [ur(31,b,21,a,c,14,a,d,86,a),unit_del(a,98)].
+
+============================== end of proof ==========================
+
+============================== STATISTICS ============================
+
+Given=36. Generated=115. Kept=90. proofs=1.
+Usable=31. Sos=31. Demods=0. Limbo=1, Disabled=57. Hints=0.
+Kept_by_rule=0, Deleted_by_rule=0.
+Forward_subsumed=24. Back_subsumed=22.
+Sos_limit_deleted=0. Sos_displaced=0. Sos_removed=0.
+New_demodulators=0 (0 lex), Back_demodulated=0. Back_unit_deleted=5.
+Demod_attempts=0. Demod_rewrites=0.
+Res_instance_prunes=0. Para_instance_prunes=0. Basic_paramod_prunes=0.
+Nonunit_fsub_feature_tests=36. Nonunit_bsub_feature_tests=115.
+Megabytes=0.12.
+User_CPU=0.01, System_CPU=0.00, Wall_clock=0.
+
+============================== end of statistics =====================
+
+============================== end of search =========================
+
+THEOREM PROVED
+
+Exiting with 1 proof.
+
+Process 18690 exit (max_proofs) Thu Jan  8 15:51:27 2015

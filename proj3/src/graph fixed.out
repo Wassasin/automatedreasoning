@@ -1,0 +1,578 @@
+============================== Prover9 ===============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 4307 was started by wgeraedts on crookshanks,
+Tue Jan 20 12:32:03 2015
+The command was "prover9 -f graph fixed.in".
+============================== end of head ===========================
+
+============================== INPUT =================================
+
+% Reading from file graph fixed.in
+
+
+formulas(assumptions).
+red(B,F).
+red(B,I).
+red(C,H).
+red(D,J).
+red(E,I).
+red(G,I).
+red(I,J).
+blue(C,G).
+blue(D,I).
+blue(E,H).
+blue(F,J).
+blue(G,H).
+red(A,E).
+blue(D,B).
+path_blue(x,y) & (red(y,z) | red(z,y)) -> path_red(x,z).
+path_red(x,y) & (blue(y,z) | blue(z,y)) -> path_blue(x,z).
+path_blue(x,x).
+path_red(x,x).
+end_of_list.
+
+formulas(goals).
+path_blue(A,B) | path_red(A,B).
+end_of_list.
+
+============================== end of input ==========================
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+1 path_blue(x,y) & (red(y,z) | red(z,y)) -> path_red(x,z) # label(non_clause).  [assumption].
+2 path_red(x,y) & (blue(y,z) | blue(z,y)) -> path_blue(x,z) # label(non_clause).  [assumption].
+3 path_blue(A,B) | path_red(A,B) # label(non_clause) # label(goal).  [goal].
+
+============================== end of process non-clausal formulas ===
+
+============================== PROCESS INITIAL CLAUSES ===============
+
+% Clauses before input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+red(B,F).  [assumption].
+red(B,I).  [assumption].
+red(C,H).  [assumption].
+red(D,J).  [assumption].
+red(E,I).  [assumption].
+red(G,I).  [assumption].
+red(I,J).  [assumption].
+blue(C,G).  [assumption].
+blue(D,I).  [assumption].
+blue(E,H).  [assumption].
+blue(F,J).  [assumption].
+blue(G,H).  [assumption].
+red(A,E).  [assumption].
+blue(D,B).  [assumption].
+-path_blue(x,y) | -red(y,z) | path_red(x,z).  [clausify(1)].
+-path_blue(x,y) | -red(z,y) | path_red(x,z).  [clausify(1)].
+-path_red(x,y) | -blue(y,z) | path_blue(x,z).  [clausify(2)].
+-path_red(x,y) | -blue(z,y) | path_blue(x,z).  [clausify(2)].
+path_blue(x,x).  [assumption].
+path_red(x,x).  [assumption].
+-path_blue(A,B).  [deny(3)].
+-path_red(A,B).  [deny(3)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== PREDICATE ELIMINATION =================
+
+Eliminating red/2
+4 -path_blue(x,y) | -red(y,z) | path_red(x,z).  [clausify(1)].
+5 red(B,F).  [assumption].
+6 red(B,I).  [assumption].
+7 red(C,H).  [assumption].
+8 red(D,J).  [assumption].
+9 red(E,I).  [assumption].
+10 red(G,I).  [assumption].
+11 red(I,J).  [assumption].
+12 red(A,E).  [assumption].
+Derived: -path_blue(x,B) | path_red(x,F).  [resolve(4,b,5,a)].
+Derived: -path_blue(x,B) | path_red(x,I).  [resolve(4,b,6,a)].
+Derived: -path_blue(x,C) | path_red(x,H).  [resolve(4,b,7,a)].
+Derived: -path_blue(x,D) | path_red(x,J).  [resolve(4,b,8,a)].
+Derived: -path_blue(x,E) | path_red(x,I).  [resolve(4,b,9,a)].
+Derived: -path_blue(x,G) | path_red(x,I).  [resolve(4,b,10,a)].
+Derived: -path_blue(x,I) | path_red(x,J).  [resolve(4,b,11,a)].
+Derived: -path_blue(x,A) | path_red(x,E).  [resolve(4,b,12,a)].
+13 -path_blue(x,y) | -red(z,y) | path_red(x,z).  [clausify(1)].
+Derived: -path_blue(x,F) | path_red(x,B).  [resolve(13,b,5,a)].
+Derived: -path_blue(x,I) | path_red(x,B).  [resolve(13,b,6,a)].
+Derived: -path_blue(x,H) | path_red(x,C).  [resolve(13,b,7,a)].
+Derived: -path_blue(x,J) | path_red(x,D).  [resolve(13,b,8,a)].
+Derived: -path_blue(x,I) | path_red(x,E).  [resolve(13,b,9,a)].
+Derived: -path_blue(x,I) | path_red(x,G).  [resolve(13,b,10,a)].
+Derived: -path_blue(x,J) | path_red(x,I).  [resolve(13,b,11,a)].
+Derived: -path_blue(x,E) | path_red(x,A).  [resolve(13,b,12,a)].
+
+Eliminating blue/2
+14 -path_red(x,y) | -blue(y,z) | path_blue(x,z).  [clausify(2)].
+15 blue(C,G).  [assumption].
+16 blue(D,I).  [assumption].
+17 blue(E,H).  [assumption].
+18 blue(F,J).  [assumption].
+19 blue(G,H).  [assumption].
+20 blue(D,B).  [assumption].
+Derived: -path_red(x,C) | path_blue(x,G).  [resolve(14,b,15,a)].
+Derived: -path_red(x,D) | path_blue(x,I).  [resolve(14,b,16,a)].
+Derived: -path_red(x,E) | path_blue(x,H).  [resolve(14,b,17,a)].
+Derived: -path_red(x,F) | path_blue(x,J).  [resolve(14,b,18,a)].
+Derived: -path_red(x,G) | path_blue(x,H).  [resolve(14,b,19,a)].
+Derived: -path_red(x,D) | path_blue(x,B).  [resolve(14,b,20,a)].
+21 -path_red(x,y) | -blue(z,y) | path_blue(x,z).  [clausify(2)].
+Derived: -path_red(x,G) | path_blue(x,C).  [resolve(21,b,15,a)].
+Derived: -path_red(x,I) | path_blue(x,D).  [resolve(21,b,16,a)].
+Derived: -path_red(x,H) | path_blue(x,E).  [resolve(21,b,17,a)].
+Derived: -path_red(x,J) | path_blue(x,F).  [resolve(21,b,18,a)].
+Derived: -path_red(x,H) | path_blue(x,G).  [resolve(21,b,19,a)].
+Derived: -path_red(x,B) | path_blue(x,D).  [resolve(21,b,20,a)].
+
+Eliminating path_blue/2
+22 -path_blue(A,B).  [deny(3)].
+23 path_blue(x,x).  [assumption].
+24 -path_blue(x,B) | path_red(x,F).  [resolve(4,b,5,a)].
+Derived: path_red(B,F).  [resolve(24,a,23,a)].
+25 -path_blue(x,B) | path_red(x,I).  [resolve(4,b,6,a)].
+Derived: path_red(B,I).  [resolve(25,a,23,a)].
+26 -path_blue(x,C) | path_red(x,H).  [resolve(4,b,7,a)].
+Derived: path_red(C,H).  [resolve(26,a,23,a)].
+27 -path_blue(x,D) | path_red(x,J).  [resolve(4,b,8,a)].
+Derived: path_red(D,J).  [resolve(27,a,23,a)].
+28 -path_blue(x,E) | path_red(x,I).  [resolve(4,b,9,a)].
+Derived: path_red(E,I).  [resolve(28,a,23,a)].
+29 -path_blue(x,G) | path_red(x,I).  [resolve(4,b,10,a)].
+Derived: path_red(G,I).  [resolve(29,a,23,a)].
+30 -path_blue(x,I) | path_red(x,J).  [resolve(4,b,11,a)].
+Derived: path_red(I,J).  [resolve(30,a,23,a)].
+31 -path_blue(x,A) | path_red(x,E).  [resolve(4,b,12,a)].
+Derived: path_red(A,E).  [resolve(31,a,23,a)].
+32 -path_blue(x,F) | path_red(x,B).  [resolve(13,b,5,a)].
+Derived: path_red(F,B).  [resolve(32,a,23,a)].
+33 -path_blue(x,I) | path_red(x,B).  [resolve(13,b,6,a)].
+Derived: path_red(I,B).  [resolve(33,a,23,a)].
+34 -path_blue(x,H) | path_red(x,C).  [resolve(13,b,7,a)].
+Derived: path_red(H,C).  [resolve(34,a,23,a)].
+35 -path_blue(x,J) | path_red(x,D).  [resolve(13,b,8,a)].
+Derived: path_red(J,D).  [resolve(35,a,23,a)].
+36 -path_blue(x,I) | path_red(x,E).  [resolve(13,b,9,a)].
+Derived: path_red(I,E).  [resolve(36,a,23,a)].
+37 -path_blue(x,I) | path_red(x,G).  [resolve(13,b,10,a)].
+Derived: path_red(I,G).  [resolve(37,a,23,a)].
+38 -path_blue(x,J) | path_red(x,I).  [resolve(13,b,11,a)].
+Derived: path_red(J,I).  [resolve(38,a,23,a)].
+39 -path_blue(x,E) | path_red(x,A).  [resolve(13,b,12,a)].
+Derived: path_red(E,A).  [resolve(39,a,23,a)].
+40 -path_red(x,C) | path_blue(x,G).  [resolve(14,b,15,a)].
+Derived: -path_red(x,C) | path_red(x,I).  [resolve(40,b,29,a)].
+41 -path_red(x,D) | path_blue(x,I).  [resolve(14,b,16,a)].
+Derived: -path_red(x,D) | path_red(x,J).  [resolve(41,b,30,a)].
+Derived: -path_red(x,D) | path_red(x,B).  [resolve(41,b,33,a)].
+Derived: -path_red(x,D) | path_red(x,E).  [resolve(41,b,36,a)].
+Derived: -path_red(x,D) | path_red(x,G).  [resolve(41,b,37,a)].
+42 -path_red(x,E) | path_blue(x,H).  [resolve(14,b,17,a)].
+Derived: -path_red(x,E) | path_red(x,C).  [resolve(42,b,34,a)].
+43 -path_red(x,F) | path_blue(x,J).  [resolve(14,b,18,a)].
+Derived: -path_red(x,F) | path_red(x,D).  [resolve(43,b,35,a)].
+Derived: -path_red(x,F) | path_red(x,I).  [resolve(43,b,38,a)].
+44 -path_red(x,G) | path_blue(x,H).  [resolve(14,b,19,a)].
+Derived: -path_red(x,G) | path_red(x,C).  [resolve(44,b,34,a)].
+45 -path_red(x,D) | path_blue(x,B).  [resolve(14,b,20,a)].
+Derived: -path_red(A,D).  [resolve(45,b,22,a)].
+Derived: -path_red(x,D) | path_red(x,F).  [resolve(45,b,24,a)].
+Derived: -path_red(x,D) | path_red(x,I).  [resolve(45,b,25,a)].
+46 -path_red(x,G) | path_blue(x,C).  [resolve(21,b,15,a)].
+Derived: -path_red(x,G) | path_red(x,H).  [resolve(46,b,26,a)].
+47 -path_red(x,I) | path_blue(x,D).  [resolve(21,b,16,a)].
+Derived: -path_red(x,I) | path_red(x,J).  [resolve(47,b,27,a)].
+48 -path_red(x,H) | path_blue(x,E).  [resolve(21,b,17,a)].
+Derived: -path_red(x,H) | path_red(x,I).  [resolve(48,b,28,a)].
+Derived: -path_red(x,H) | path_red(x,A).  [resolve(48,b,39,a)].
+49 -path_red(x,J) | path_blue(x,F).  [resolve(21,b,18,a)].
+Derived: -path_red(x,J) | path_red(x,B).  [resolve(49,b,32,a)].
+50 -path_red(x,H) | path_blue(x,G).  [resolve(21,b,19,a)].
+51 -path_red(x,B) | path_blue(x,D).  [resolve(21,b,20,a)].
+Derived: -path_red(x,B) | path_red(x,J).  [resolve(51,b,27,a)].
+
+============================== end predicate elimination =============
+
+Auto_denials:
+  % assign(max_proofs, 2).  % (Horn set with more than one neg. clause)
+
+WARNING, because some of the denials share constants,
+some of the denials or their descendents may be subsumed,
+preventing the target number of proofs from being found.
+The shared constants are:  A.
+
+Term ordering decisions:
+Predicate symbol precedence:  predicate_order([ path_red ]).
+Function symbol precedence:  function_order([ I, D, J, B, E, C, F, G, H, A ]).
+After inverse_order:  (no changes).
+Unfolding symbols: (none).
+
+Auto_inference settings:
+  % set(neg_binary_resolution).  % (HNE depth_diff=0)
+  % clear(ordered_res).  % (HNE depth_diff=0)
+  % set(ur_resolution).  % (HNE depth_diff=0)
+    % set(ur_resolution) -> set(pos_ur_resolution).
+    % set(ur_resolution) -> set(neg_ur_resolution).
+
+Auto_process settings:  (no changes).
+
+kept:      52 path_red(x,x).  [assumption].
+kept:      53 -path_red(A,B).  [deny(3)].
+kept:      54 path_red(B,F).  [resolve(24,a,23,a)].
+kept:      55 path_red(B,I).  [resolve(25,a,23,a)].
+kept:      56 path_red(C,H).  [resolve(26,a,23,a)].
+kept:      57 path_red(D,J).  [resolve(27,a,23,a)].
+kept:      58 path_red(E,I).  [resolve(28,a,23,a)].
+kept:      59 path_red(G,I).  [resolve(29,a,23,a)].
+kept:      60 path_red(I,J).  [resolve(30,a,23,a)].
+kept:      61 path_red(A,E).  [resolve(31,a,23,a)].
+kept:      62 path_red(F,B).  [resolve(32,a,23,a)].
+kept:      63 path_red(I,B).  [resolve(33,a,23,a)].
+kept:      64 path_red(H,C).  [resolve(34,a,23,a)].
+kept:      65 path_red(J,D).  [resolve(35,a,23,a)].
+kept:      66 path_red(I,E).  [resolve(36,a,23,a)].
+kept:      67 path_red(I,G).  [resolve(37,a,23,a)].
+kept:      68 path_red(J,I).  [resolve(38,a,23,a)].
+kept:      69 path_red(E,A).  [resolve(39,a,23,a)].
+kept:      70 -path_red(x,C) | path_red(x,I).  [resolve(40,b,29,a)].
+kept:      71 -path_red(x,D) | path_red(x,J).  [resolve(41,b,30,a)].
+kept:      72 -path_red(x,D) | path_red(x,B).  [resolve(41,b,33,a)].
+kept:      73 -path_red(x,D) | path_red(x,E).  [resolve(41,b,36,a)].
+kept:      74 -path_red(x,D) | path_red(x,G).  [resolve(41,b,37,a)].
+kept:      75 -path_red(x,E) | path_red(x,C).  [resolve(42,b,34,a)].
+kept:      76 -path_red(x,F) | path_red(x,D).  [resolve(43,b,35,a)].
+kept:      77 -path_red(x,F) | path_red(x,I).  [resolve(43,b,38,a)].
+kept:      78 -path_red(x,G) | path_red(x,C).  [resolve(44,b,34,a)].
+kept:      79 -path_red(A,D).  [resolve(45,b,22,a)].
+kept:      80 -path_red(x,D) | path_red(x,F).  [resolve(45,b,24,a)].
+kept:      81 -path_red(x,D) | path_red(x,I).  [resolve(45,b,25,a)].
+kept:      82 -path_red(x,G) | path_red(x,H).  [resolve(46,b,26,a)].
+kept:      83 -path_red(x,I) | path_red(x,J).  [resolve(47,b,27,a)].
+kept:      84 -path_red(x,H) | path_red(x,I).  [resolve(48,b,28,a)].
+kept:      85 -path_red(x,H) | path_red(x,A).  [resolve(48,b,39,a)].
+kept:      86 -path_red(x,J) | path_red(x,B).  [resolve(49,b,32,a)].
+kept:      87 -path_red(x,B) | path_red(x,J).  [resolve(51,b,27,a)].
+
+============================== end of process initial clauses ========
+
+============================== CLAUSES FOR SEARCH ====================
+
+% Clauses after input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+52 path_red(x,x).  [assumption].
+53 -path_red(A,B).  [deny(3)].
+54 path_red(B,F).  [resolve(24,a,23,a)].
+55 path_red(B,I).  [resolve(25,a,23,a)].
+56 path_red(C,H).  [resolve(26,a,23,a)].
+57 path_red(D,J).  [resolve(27,a,23,a)].
+58 path_red(E,I).  [resolve(28,a,23,a)].
+59 path_red(G,I).  [resolve(29,a,23,a)].
+60 path_red(I,J).  [resolve(30,a,23,a)].
+61 path_red(A,E).  [resolve(31,a,23,a)].
+62 path_red(F,B).  [resolve(32,a,23,a)].
+63 path_red(I,B).  [resolve(33,a,23,a)].
+64 path_red(H,C).  [resolve(34,a,23,a)].
+65 path_red(J,D).  [resolve(35,a,23,a)].
+66 path_red(I,E).  [resolve(36,a,23,a)].
+67 path_red(I,G).  [resolve(37,a,23,a)].
+68 path_red(J,I).  [resolve(38,a,23,a)].
+69 path_red(E,A).  [resolve(39,a,23,a)].
+70 -path_red(x,C) | path_red(x,I).  [resolve(40,b,29,a)].
+71 -path_red(x,D) | path_red(x,J).  [resolve(41,b,30,a)].
+72 -path_red(x,D) | path_red(x,B).  [resolve(41,b,33,a)].
+73 -path_red(x,D) | path_red(x,E).  [resolve(41,b,36,a)].
+74 -path_red(x,D) | path_red(x,G).  [resolve(41,b,37,a)].
+75 -path_red(x,E) | path_red(x,C).  [resolve(42,b,34,a)].
+76 -path_red(x,F) | path_red(x,D).  [resolve(43,b,35,a)].
+77 -path_red(x,F) | path_red(x,I).  [resolve(43,b,38,a)].
+78 -path_red(x,G) | path_red(x,C).  [resolve(44,b,34,a)].
+79 -path_red(A,D).  [resolve(45,b,22,a)].
+80 -path_red(x,D) | path_red(x,F).  [resolve(45,b,24,a)].
+81 -path_red(x,D) | path_red(x,I).  [resolve(45,b,25,a)].
+82 -path_red(x,G) | path_red(x,H).  [resolve(46,b,26,a)].
+83 -path_red(x,I) | path_red(x,J).  [resolve(47,b,27,a)].
+84 -path_red(x,H) | path_red(x,I).  [resolve(48,b,28,a)].
+85 -path_red(x,H) | path_red(x,A).  [resolve(48,b,39,a)].
+86 -path_red(x,J) | path_red(x,B).  [resolve(49,b,32,a)].
+87 -path_red(x,B) | path_red(x,J).  [resolve(51,b,27,a)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== end of clauses for search =============
+
+============================== SEARCH ================================
+
+% Starting search at 0.01 seconds.
+
+given #1 (I,wt=3): 52 path_red(x,x).  [assumption].
+
+given #2 (I,wt=3): 53 -path_red(A,B).  [deny(3)].
+
+given #3 (I,wt=3): 54 path_red(B,F).  [resolve(24,a,23,a)].
+
+given #4 (I,wt=3): 55 path_red(B,I).  [resolve(25,a,23,a)].
+
+given #5 (I,wt=3): 56 path_red(C,H).  [resolve(26,a,23,a)].
+
+given #6 (I,wt=3): 57 path_red(D,J).  [resolve(27,a,23,a)].
+
+given #7 (I,wt=3): 58 path_red(E,I).  [resolve(28,a,23,a)].
+
+given #8 (I,wt=3): 59 path_red(G,I).  [resolve(29,a,23,a)].
+
+given #9 (I,wt=3): 60 path_red(I,J).  [resolve(30,a,23,a)].
+
+given #10 (I,wt=3): 61 path_red(A,E).  [resolve(31,a,23,a)].
+
+given #11 (I,wt=3): 62 path_red(F,B).  [resolve(32,a,23,a)].
+
+given #12 (I,wt=3): 63 path_red(I,B).  [resolve(33,a,23,a)].
+
+given #13 (I,wt=3): 64 path_red(H,C).  [resolve(34,a,23,a)].
+
+given #14 (I,wt=3): 65 path_red(J,D).  [resolve(35,a,23,a)].
+
+given #15 (I,wt=3): 66 path_red(I,E).  [resolve(36,a,23,a)].
+
+given #16 (I,wt=3): 67 path_red(I,G).  [resolve(37,a,23,a)].
+
+given #17 (I,wt=3): 68 path_red(J,I).  [resolve(38,a,23,a)].
+
+given #18 (I,wt=3): 69 path_red(E,A).  [resolve(39,a,23,a)].
+
+given #19 (I,wt=6): 70 -path_red(x,C) | path_red(x,I).  [resolve(40,b,29,a)].
+
+given #20 (I,wt=6): 71 -path_red(x,D) | path_red(x,J).  [resolve(41,b,30,a)].
+
+given #21 (I,wt=6): 72 -path_red(x,D) | path_red(x,B).  [resolve(41,b,33,a)].
+
+given #22 (I,wt=6): 73 -path_red(x,D) | path_red(x,E).  [resolve(41,b,36,a)].
+
+given #23 (I,wt=6): 74 -path_red(x,D) | path_red(x,G).  [resolve(41,b,37,a)].
+
+given #24 (I,wt=6): 75 -path_red(x,E) | path_red(x,C).  [resolve(42,b,34,a)].
+
+given #25 (I,wt=6): 76 -path_red(x,F) | path_red(x,D).  [resolve(43,b,35,a)].
+
+given #26 (I,wt=6): 77 -path_red(x,F) | path_red(x,I).  [resolve(43,b,38,a)].
+
+given #27 (I,wt=6): 78 -path_red(x,G) | path_red(x,C).  [resolve(44,b,34,a)].
+
+given #28 (I,wt=3): 79 -path_red(A,D).  [resolve(45,b,22,a)].
+
+given #29 (I,wt=6): 80 -path_red(x,D) | path_red(x,F).  [resolve(45,b,24,a)].
+
+given #30 (I,wt=6): 81 -path_red(x,D) | path_red(x,I).  [resolve(45,b,25,a)].
+
+given #31 (I,wt=6): 82 -path_red(x,G) | path_red(x,H).  [resolve(46,b,26,a)].
+
+given #32 (I,wt=6): 83 -path_red(x,I) | path_red(x,J).  [resolve(47,b,27,a)].
+
+given #33 (I,wt=6): 84 -path_red(x,H) | path_red(x,I).  [resolve(48,b,28,a)].
+
+given #34 (I,wt=6): 85 -path_red(x,H) | path_red(x,A).  [resolve(48,b,39,a)].
+
+given #35 (I,wt=6): 86 -path_red(x,J) | path_red(x,B).  [resolve(49,b,32,a)].
+
+given #36 (I,wt=6): 87 -path_red(x,B) | path_red(x,J).  [resolve(51,b,27,a)].
+
+given #37 (A,wt=3): 88 path_red(H,I).  [ur(70,a,64,a)].
+
+given #38 (F,wt=3): 103 -path_red(A,F).  [resolve(79,a,76,b)].
+
+given #39 (F,wt=3): 114 -path_red(A,J).  [resolve(86,b,53,a)].
+
+given #40 (F,wt=3): 117 -path_red(A,I).  [resolve(114,a,83,b)].
+
+============================== PROOF =================================
+
+% Proof 1 at 0.01 (+ 0.01) seconds.
+% Length of proof is 37.
+% Level of proof is 7.
+% Maximum clause weight is 6.000.
+% Given clauses 40.
+
+1 path_blue(x,y) & (red(y,z) | red(z,y)) -> path_red(x,z) # label(non_clause).  [assumption].
+2 path_red(x,y) & (blue(y,z) | blue(z,y)) -> path_blue(x,z) # label(non_clause).  [assumption].
+3 path_blue(A,B) | path_red(A,B) # label(non_clause) # label(goal).  [goal].
+4 -path_blue(x,y) | -red(y,z) | path_red(x,z).  [clausify(1)].
+5 red(B,F).  [assumption].
+7 red(C,H).  [assumption].
+8 red(D,J).  [assumption].
+10 red(G,I).  [assumption].
+12 red(A,E).  [assumption].
+13 -path_blue(x,y) | -red(z,y) | path_red(x,z).  [clausify(1)].
+14 -path_red(x,y) | -blue(y,z) | path_blue(x,z).  [clausify(2)].
+15 blue(C,G).  [assumption].
+16 blue(D,I).  [assumption].
+17 blue(E,H).  [assumption].
+18 blue(F,J).  [assumption].
+21 -path_red(x,y) | -blue(z,y) | path_blue(x,z).  [clausify(2)].
+23 path_blue(x,x).  [assumption].
+27 -path_blue(x,D) | path_red(x,J).  [resolve(4,b,8,a)].
+29 -path_blue(x,G) | path_red(x,I).  [resolve(4,b,10,a)].
+31 -path_blue(x,A) | path_red(x,E).  [resolve(4,b,12,a)].
+32 -path_blue(x,F) | path_red(x,B).  [resolve(13,b,5,a)].
+34 -path_blue(x,H) | path_red(x,C).  [resolve(13,b,7,a)].
+40 -path_red(x,C) | path_blue(x,G).  [resolve(14,b,15,a)].
+42 -path_red(x,E) | path_blue(x,H).  [resolve(14,b,17,a)].
+47 -path_red(x,I) | path_blue(x,D).  [resolve(21,b,16,a)].
+49 -path_red(x,J) | path_blue(x,F).  [resolve(21,b,18,a)].
+53 -path_red(A,B).  [deny(3)].
+61 path_red(A,E).  [resolve(31,a,23,a)].
+70 -path_red(x,C) | path_red(x,I).  [resolve(40,b,29,a)].
+75 -path_red(x,E) | path_red(x,C).  [resolve(42,b,34,a)].
+83 -path_red(x,I) | path_red(x,J).  [resolve(47,b,27,a)].
+86 -path_red(x,J) | path_red(x,B).  [resolve(49,b,32,a)].
+97 path_red(A,C).  [ur(75,a,61,a)].
+114 -path_red(A,J).  [resolve(86,b,53,a)].
+117 -path_red(A,I).  [resolve(114,a,83,b)].
+119 -path_red(A,C).  [resolve(117,a,70,b)].
+120 $F.  [resolve(119,a,97,a)].
+
+============================== end of proof ==========================
+
+% Disable descendants (x means already disabled):
+ 53 114 117 118 119
+
+given #41 (T,wt=3): 89 path_red(C,I).  [ur(70,a,52,a)].
+
+given #42 (T,wt=3): 90 path_red(J,B).  [ur(72,a,65,a)].
+
+given #43 (T,wt=3): 91 path_red(D,B).  [ur(72,a,52,a)].
+
+given #44 (T,wt=3): 92 path_red(J,E).  [ur(73,a,65,a)].
+
+given #45 (A,wt=3): 93 path_red(D,E).  [ur(73,a,52,a)].
+
+given #46 (T,wt=3): 94 path_red(J,G).  [ur(74,a,65,a)].
+
+given #47 (T,wt=3): 95 path_red(D,G).  [ur(74,a,52,a)].
+
+given #48 (T,wt=3): 96 path_red(I,C).  [ur(75,a,66,a)].
+
+given #49 (T,wt=3): 97 path_red(A,C).  [ur(75,a,61,a)].
+
+given #50 (A,wt=3): 98 path_red(E,C).  [ur(75,a,52,a)].
+
+given #51 (T,wt=3): 99 path_red(B,D).  [ur(76,a,54,a)].
+
+given #52 (T,wt=3): 100 path_red(F,D).  [ur(76,a,52,a)].
+
+given #53 (T,wt=3): 101 path_red(F,I).  [ur(77,a,52,a)].
+
+given #54 (T,wt=3): 102 path_red(G,C).  [ur(78,a,52,a)].
+
+given #55 (A,wt=3): 104 path_red(J,F).  [ur(80,a,65,a)].
+
+given #56 (T,wt=3): 105 path_red(D,F).  [ur(80,a,52,a)].
+
+given #57 (T,wt=3): 106 path_red(D,I).  [ur(81,a,52,a)].
+
+given #58 (T,wt=3): 107 path_red(I,H).  [ur(82,a,67,a)].
+
+given #59 (T,wt=3): 108 path_red(G,H).  [ur(82,a,52,a)].
+
+given #60 (A,wt=3): 109 path_red(G,J).  [ur(83,a,59,a)].
+
+given #61 (T,wt=3): 110 path_red(E,J).  [ur(83,a,58,a)].
+
+given #62 (T,wt=3): 111 path_red(B,J).  [ur(83,a,55,a)].
+
+given #63 (T,wt=3): 112 path_red(C,A).  [ur(85,a,56,a)].
+
+given #64 (T,wt=3): 113 path_red(H,A).  [ur(85,a,52,a)].
+
+given #65 (A,wt=3): 115 path_red(F,J).  [ur(87,a,62,a)].
+
+given #66 (T,wt=3): 116 path_red(H,J).  [ur(83,a,88,a)].
+
+given #67 (T,wt=3): 121 path_red(C,J).  [ur(83,a,89,a)].
+
+given #68 (T,wt=3): 122 path_red(J,C).  [ur(75,a,92,a)].
+
+given #69 (T,wt=3): 123 path_red(D,C).  [ur(75,a,93,a)].
+
+given #70 (A,wt=3): 124 path_red(J,H).  [ur(82,a,94,a)].
+
+given #71 (T,wt=3): 125 path_red(D,H).  [ur(82,a,95,a)].
+
+given #72 (T,wt=3): 126 path_red(A,I).  [ur(70,a,97,a)].
+
+given #73 (T,wt=3): 127 path_red(B,G).  [ur(74,a,99,a)].
+
+given #74 (T,wt=3): 128 path_red(B,E).  [ur(73,a,99,a)].
+
+given #75 (A,wt=3): 129 path_red(F,G).  [ur(74,a,100,a)].
+
+given #76 (T,wt=3): 130 path_red(F,E).  [ur(73,a,100,a)].
+
+given #77 (T,wt=3): 131 path_red(I,A).  [ur(85,a,107,a)].
+
+given #78 (T,wt=3): 132 path_red(G,A).  [ur(85,a,108,a)].
+
+given #79 (T,wt=3): 133 path_red(G,B).  [ur(86,a,109,a)].
+
+given #80 (A,wt=3): 134 path_red(E,B).  [ur(86,a,110,a)].
+
+given #81 (T,wt=3): 135 path_red(H,B).  [ur(86,a,116,a)].
+
+given #82 (T,wt=3): 136 path_red(C,B).  [ur(86,a,121,a)].
+
+given #83 (T,wt=3): 137 path_red(J,A).  [ur(85,a,124,a)].
+
+given #84 (T,wt=3): 138 path_red(D,A).  [ur(85,a,125,a)].
+
+given #85 (A,wt=3): 139 path_red(A,J).  [ur(83,a,126,a)].
+
+given #86 (T,wt=3): 140 path_red(B,H).  [ur(82,a,127,a)].
+
+given #87 (T,wt=3): 141 path_red(B,C).  [ur(78,a,127,a)].
+
+given #88 (T,wt=3): 142 path_red(F,H).  [ur(82,a,129,a)].
+
+given #89 (T,wt=3): 143 path_red(F,C).  [ur(78,a,129,a)].
+
+given #90 (A,wt=3): 144 path_red(A,B).  [ur(86,a,139,a)].
+
+given #91 (T,wt=3): 145 path_red(B,A).  [ur(85,a,140,a)].
+
+given #92 (T,wt=3): 146 path_red(F,A).  [ur(85,a,142,a)].
+
+============================== STATISTICS ============================
+
+Given=92. Generated=165. Kept=94. proofs=1.
+Usable=89. Sos=0. Demods=0. Limbo=0, Disabled=89. Hints=0.
+Kept_by_rule=0, Deleted_by_rule=0.
+Forward_subsumed=71. Back_subsumed=0.
+Sos_limit_deleted=0. Sos_displaced=0. Sos_removed=0.
+New_demodulators=0 (0 lex), Back_demodulated=0. Back_unit_deleted=0.
+Demod_attempts=0. Demod_rewrites=0.
+Res_instance_prunes=0. Para_instance_prunes=0. Basic_paramod_prunes=0.
+Nonunit_fsub_feature_tests=0. Nonunit_bsub_feature_tests=34.
+Megabytes=0.13.
+User_CPU=0.01, System_CPU=0.01, Wall_clock=0.
+
+============================== end of statistics =====================
+
+============================== end of search =========================
+
+SEARCH FAILED
+
+Exiting with 1 proof.
+
+Process 4307 exit (sos_empty) Tue Jan 20 12:32:03 2015

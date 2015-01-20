@@ -14,9 +14,9 @@ blue(E, H).
 blue(F, J).
 blue(G, H).
 
-% Optional edges
-red(A, C) | red(A, E) | red(A, G).
-blue(D, A) | blue(D, B).
+% Optional edges, but fixed this time
+red(A, E).
+blue(D, B).
 
 path_blue(x, y) & (red(y, z) | red(z, y)) -> path_red(x, z).
 path_red(x, y) & (blue(y, z) | blue(z, y)) -> path_blue(x, z).
