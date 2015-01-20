@@ -56,3 +56,5 @@ target/
 # LaTeX
 *.aux
 *.pdf
+*.bbl
+*.blg
