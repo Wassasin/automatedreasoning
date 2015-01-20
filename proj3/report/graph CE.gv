@@ -1,0 +1,37 @@
+graph G {
+    A;
+    B;
+    C;
+    D;
+    E;
+    F;
+    G;
+    H;
+    I;
+    J;
+
+    edge [color="red"];
+    B -- F;
+    B -- I [style="invisible"];
+    C -- H;
+    D -- J;
+    E -- I [style="invisible"];
+    G -- I;
+    I -- J [style="invisible"];
+    
+    edge [color="blue"];
+    C -- G;
+    D -- I;
+    E -- H;
+    F -- J;
+    G -- H;
+    
+    edge [color="red", style="dashed"];
+    A -- C [style="invisible"];
+    A -- E;
+    A -- G [style="invisible"];
+    
+    edge [color="blue", style="dashed"];
+    D -- A [style="invisible"];
+    D -- B [style="invisible"];
+}
